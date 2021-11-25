@@ -139,4 +139,11 @@ def race(*participants: Participant, finish: NamedPos) -> str:
     Returns:
         str: имя участника, который доберется первым или имя первого переданного участника (participants[0])
     """
+    winner = participants[0].name
+    speed_record = participants[0].pos.distance_to(finish.pos) / participants[0].speed
+    for i in range(1, len(participants)):
+        if participants[i].pos.distance_to(finish.pos) / participants[i].speed < speed_record:
+            speed_record = participants[i].pos.distance_to(finish.pos) / participants[i].speed
+            winner = participants[i].name
+    return winner
 
